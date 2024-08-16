@@ -1,7 +1,14 @@
 const express = require('express')
+const morgan = require('morgan')
+
+morgan.token('person', req => JSON.stringify(req.body))
+morgan.format('tiny+', ':method :url :status :res[content-length] - :response-time ms :person')
+
 const app = express()
 
 app.use(express.json())
+app.use(morgan('tiny', { skip: req => req.method === 'POST' }))
+app.use(morgan('tiny+', { skip: req => req.method !== 'POST' }))
 
 let persons = [
   {
@@ -55,8 +62,8 @@ app.delete('/api/persons/:id', (request, response) => {
 })
 
 app.post('/api/persons', (request, response) => {
-  const person = request.body
-  console.log('person', person)
+  const person = { ...request.body }
+  // console.log('person', person)
 
   if (person.name === '') {
     return response.status(400).json({
