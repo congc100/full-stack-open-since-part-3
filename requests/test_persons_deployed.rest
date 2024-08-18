@@ -1,0 +1,38 @@
+### get all persons
+GET https://full-stack-open-since-part-3.onrender.com/api/persons
+
+### get info
+GET https://full-stack-open-since-part-3.onrender.com/info
+
+### get one person
+GET https://full-stack-open-since-part-3.onrender.com/api/persons/1
+
+### delete one person
+DELETE https://full-stack-open-since-part-3.onrender.com/api/persons/1
+
+### add one new person
+POST https://full-stack-open-since-part-3.onrender.com/api/persons
+Content-Type: application/json
+
+{
+  "name": "Lady Gaga",
+  "number": "123456789"
+}
+
+### add a person with no name
+POST https://full-stack-open-since-part-3.onrender.com/api/persons
+Content-Type: application/json
+
+{
+  "name": "",
+  "number": "123456789"
+}
+
+### add a person with no number
+POST https://full-stack-open-since-part-3.onrender.com/api/persons
+Content-Type: application/json
+
+{
+  "name": "Lady Gaga",
+  "number": ""
+}
