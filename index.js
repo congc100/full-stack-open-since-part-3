@@ -7,6 +7,7 @@ morgan.format('tiny+', ':method :url :status :res[content-length] - :response-ti
 const app = express()
 
 app.use(express.json())
+app.use(express.static('dist'))
 app.use(morgan('tiny', { skip: req => req.method === 'POST' }))
 app.use(morgan('tiny+', { skip: req => req.method !== 'POST' }))
 
