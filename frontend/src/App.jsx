@@ -74,7 +74,7 @@ const App = () => {
       .remove(id)
       .then(response => {
         console.log('remove res', response)
-        notify(`${response.data.name} deleted`)
+        notify(`${persons.find(p => p.id === id).name} deleted`)
         setPersons(persons.filter(p => p.id !== id))
       })
   }
