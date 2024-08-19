@@ -47,14 +47,21 @@ const App = () => {
         .update(current.id, { ...current, number: newNumber })
         .then(response => {
           console.log('update res', response)
-          notify(`${response.data.name} updated`)
-          setPersons(persons.map(p => p.id === response.data.id ? response.data : p))
-          setNewName('')
-          setNewNumber('')
+          if (response.data === null) {
+            errorify(`Information of ${current.name} has already been removed from server`)
+            setPersons(persons.filter(p => p.id !== current.id))
+            setNewName('')
+            setNewNumber('')
+          } else {
+            notify(`${response.data.name || 'person'} updated`)
+            setPersons(persons.map(p => p.id === response.data.id ? response.data : p))
+            setNewName('')
+            setNewNumber('')
+          }
         })
         .catch(error => {
           console.log('update error', error)
-          errorify(`Information of ${current.name} has already been removed from server`)
+          errorify(error.response?.data.error)
         })
     } else {
       personService
@@ -65,6 +72,10 @@ const App = () => {
           setPersons([...persons, response.data])
           setNewName('')
           setNewNumber('')
+        })
+        .catch(error => {
+          console.log('submit error', error)
+          errorify(error.response?.data.error)
         })
     }
   }
