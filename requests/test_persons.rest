@@ -7,6 +7,12 @@ GET http://localhost:3001/info
 ### get one person
 GET http://localhost:3001/api/persons/1
 
+### get one person by id (succeed)
+GET http://localhost:3001/api/persons/66c2c59e031c5e49cce66657
+
+### get one person by id (fail)
+GET http://localhost:3001/api/persons/66c2c59e031c5e49cce66650
+
 ### delete one person
 DELETE http://localhost:3001/api/persons/1
 
@@ -15,7 +21,7 @@ POST http://localhost:3001/api/persons
 Content-Type: application/json
 
 {
-  "name": "Lady Gaga",
+  "name": "Lady Gaga G",
   "number": "123456789"
 }
 
